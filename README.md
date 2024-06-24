@@ -20,11 +20,11 @@ The Task Manager Application is a web-based tool built with HTML, Bootstrap CSS,
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/task-manager-app.git
+    git clone https://github.com/Yugant133/Tasky-Application
     ```
 2. **Navigate to the project directory**:
     ```bash
-    cd task-manager-app
+    cd Tasky-Application
     ```
 3. **Open `index.html` in your browser**:
     ```bash
