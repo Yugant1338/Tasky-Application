@@ -34,11 +34,11 @@ The Task Manager Application is a web-based tool built with HTML, Bootstrap CSS,
 ## Screenshots
 
 ### Task List View
-![Task List](screenshots/task-list.png)
+![Task List]()
 
 ### Add/Edit Task Modal
-![Add/Edit Task](screenshots/add-edit-task.png)
+![Add/Edit Task]()
 
 ### Search Tasks
-![Search Tasks](screenshots/search-tasks.png)
+![Search Tasks]()
 
