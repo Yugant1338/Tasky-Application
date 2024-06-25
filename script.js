@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalElement = document.getElementById('modal');
     const modalInstance = new bootstrap.Modal(modalElement);
     const searchBar = document.getElementById('searchBar');
+    const forEmpty = document.getElementById('forEmpty');
     const createTaskButton = document.getElementById('createTask'); // add new task button
     // whenever add new task button is clicked a function named saveOrUpdateTask is called
     createTaskButton.addEventListener('click', function (event) {
@@ -64,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         renderTasks();
         taskForm.reset();
         modalInstance.hide();
+        zeroTask();
         // Once the data is filled or updated the local storage is updated and the new set of tasks are rendered on the webpage
     }
 
@@ -112,7 +114,15 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
         return card;
     }
-
+    window.zeroTask = function(){
+        if(Tasks.listOfTasks.length === 0) {
+            console.log("hello");
+            forEmpty.style.display = 'flex';
+        }
+        else{
+            forEmpty.style.display = 'none';
+        }
+    }
     window.openTask = function (taskId) {
         const getTask = Tasks.listOfTasks.find(task => task.id === taskId);
 
@@ -148,6 +158,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         saveFormData();
         renderTasks();
+        zeroTask();
+
     }
 
     window.editTask = function(e){
@@ -235,6 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
             taskCardsRow.appendChild(card);
         });
     }
-
+    zeroTask();
     initializeFormData();
 });

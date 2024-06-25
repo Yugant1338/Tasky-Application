@@ -11,7 +11,7 @@
     <title>Tasky</title>
 </head>
     <body>
-<!--    This part contains the navbar-->
+        <!--    This part contains the navbar-->
         <nav class="navbar navbar-expand">
             <div class="container-fluid">
                 <a href="#" class="navbar-brand">Tasky</a>
@@ -27,7 +27,7 @@
                 </ul>
             </div>
         </nav>
-<!--        This contains the search bar for searching the tasks using their Task Title-->
+        <!--        This contains the search bar for searching the tasks using their Task Title-->
         <div class="container mt-4">
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -40,7 +40,10 @@
                 </div>
             </div>
         </div>
-<!--        This is the modal drop down to add a new task in the form with multiple questions-->
+        <!--        This is the modal drop down to add a new task in the form with multiple questions-->
+        <div class = container id = "forEmpty">
+            <h1>Seems Like you are free</h1>
+        </div>
         <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content modal-dialog">
@@ -81,7 +84,7 @@
                 </div>
             </div>
         </div>
-<!--    This is the modal that is popped up when an existing task card is opened-->
+        <!--    This is the modal that is popped up when an existing task card is opened-->
         <div class="modal fade" id="showTask" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" id="taskModal">
@@ -90,7 +93,7 @@
             </div>
         </div>
         <div class="container mt-2" id="taskCardsRow">
-<!--            this is the part where the task cards will be appended-->
+            <!--            this is the part where the task cards will be appended-->
         </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

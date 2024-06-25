@@ -18,6 +18,11 @@ hr{
     margin-top: 0;
     color: #999595;
 }
+#forEmpty{
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
 .modal-body form .form-group, .col-md-12{
     margin-bottom: 5%;
 }
