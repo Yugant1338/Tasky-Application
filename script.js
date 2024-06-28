@@ -3,15 +3,23 @@ let Tasks = {
     listOfTasks: []
 };
 
-
 document.addEventListener('DOMContentLoaded', function () {
     function initializeFormData() {
         const storedData = localStorage.getItem('Tasks');
         if (storedData) {
             Tasks = JSON.parse(storedData);
+            // Ensure each task has a createdAt field
+            Tasks.listOfTasks.forEach(task => {
+                if (!task.createdAt) {
+                    task.createdAt = new Date(task.id).toLocaleString(); // Use the id (timestamp) to generate a creation date
+                }
+            });
+            saveFormData(); // Save updated data back to localStorage
             renderTasks();
         }
+        zeroTask();
     }
+
     // The required elements to either use for future reference or append new element
     const taskForm = document.getElementById('taskForm');
     const taskCardsRow = document.getElementById('taskCardsRow');
@@ -20,11 +28,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchBar = document.getElementById('searchBar');
     const forEmpty = document.getElementById('forEmpty');
     const createTaskButton = document.getElementById('createTask'); // add new task button
+
     // whenever add new task button is clicked a function named saveOrUpdateTask is called
     createTaskButton.addEventListener('click', function (event) {
         event.preventDefault();
         saveOrUpdateTask();
     });
+
     // This either updates an existing task or adds another task
     function saveOrUpdateTask() {
         const imageURL = document.getElementById('imageURL').value.trim();
@@ -37,26 +47,24 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please enter valid input');
             return;
         }
-        // If the taskId already exists then it will be updated to the new Task Details
         if (taskId) {
-            // Update task
-            const taskIndex = Tasks.listOfTasks.findIndex(task => task.id == taskId);
+            const taskIndex = Tasks.listOfTasks.findIndex(task => task.id === taskId);
             Tasks.listOfTasks[taskIndex] = {
-                id: taskId,
+                ...Tasks.listOfTasks[taskIndex],
                 imageURL: imageURL,
                 taskTitle: taskTitle,
                 taskType: taskType,
                 description: description
             };
-            // Else it will create anther task and add that to the main database
         } else {
-            // Create new task
+            const currentDate = new Date().toLocaleString();
             const newTask = {
                 id: Date.now(),
                 imageURL: imageURL,
                 taskTitle: taskTitle,
                 taskType: taskType,
-                description: description
+                description: description,
+                createdAt: currentDate
             };
             Tasks.listOfTasks.push(newTask);
         }
@@ -66,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function () {
         taskForm.reset();
         modalInstance.hide();
         zeroTask();
-        // Once the data is filled or updated the local storage is updated and the new set of tasks are rendered on the webpage
     }
 
     function saveFormData() {
@@ -114,15 +121,16 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
         return card;
     }
+
     window.zeroTask = function(){
         if(Tasks.listOfTasks.length === 0) {
-            console.log("hello");
             forEmpty.style.display = 'flex';
         }
         else{
             forEmpty.style.display = 'none';
         }
     }
+
     window.openTask = function (taskId) {
         const getTask = Tasks.listOfTasks.find(task => task.id === taskId);
 
@@ -135,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Modal element not found');
             }
         }
-    }
+    };
 
     const htmlModalContent = (task) => {
         return `
@@ -147,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 ${task.imageURL
             ? `<img width='100%' src='${task.imageURL}' alt='Image' class='img-fluid' />`
             : `<img width='100%' src='https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0' alt='Image' class='img-fluid' />`}
+                <h4>Created On: ${task.createdAt}</h4>
                 <p>${task.description}</p>
                 <span class='badge bg-primary'>${task.taskType}</span>
             </div>
@@ -159,14 +168,12 @@ document.addEventListener('DOMContentLoaded', function () {
         saveFormData();
         renderTasks();
         zeroTask();
-
-    }
+    };
 
     window.editTask = function(e){
         if (!e) e = window.event;
 
         const taskId = Number(e.target.getAttribute('data-id'));
-
         const parentNode = e.target.closest('.task-card');
 
         const taskTitle = parentNode.querySelector('.task-card-title');
@@ -178,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function () {
         taskDescription.setAttribute("contenteditable", "true");
         taskType.setAttribute("contenteditable", "true");
 
-        // Needs to be implemented
         submitButton.setAttribute("onclick", "saveEdit.apply(this, arguments)");
         submitButton.removeAttribute("data-bs-toggle");
         submitButton.removeAttribute("data-bs-target");
@@ -222,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
         submitButton.setAttribute("data-bs-target", "#showTask");
         submitButton.innerHTML = "Open Task";
     };
+
     searchBar.addEventListener('input', function () {
         searchTask(searchBar.value.toLowerCase());
     });
@@ -247,6 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
             taskCardsRow.appendChild(card);
         });
     }
+
     zeroTask();
     initializeFormData();
 });
