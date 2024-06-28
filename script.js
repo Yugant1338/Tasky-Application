@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const description = document.getElementById('description').value.trim();
         const taskId = document.getElementById('taskId').value;
 
-        if (imageURL === "" || taskTitle === "" || taskType === "" || description === "") {
+        if (taskTitle === "" || taskType === "" || description === "") {
             alert('Please enter valid input');
             return;
         }
