@@ -10,95 +10,119 @@
     <link rel = "icon" href = "resources/noun-task-manager-5807160.png">
     <title>Tasky</title>
 </head>
-    <body>
-        <!--    This part contains the navbar-->
-        <nav class="navbar navbar-expand">
-            <div class="container-fluid">
-                <a href="#" class="navbar-brand">Tasky</a>
-                <ul class="nav navbar-collapse navbar-nav">
-                    <li class="navbar-items">
-                        <a href="#" class="nav-link">Home</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li class="navbar-items">
-                        <button class="btn btn-primary navbar-btn p-sm" data-bs-toggle="modal" data-bs-target="#modal" id="addTask"><i class="fa fa-plus"></i> Add New Task</button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--        This contains the search bar for searching the tasks using their Task Title-->
-        <div class="container mt-4">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="input-group custom-input-group">
-                        <input type="text" class="form-control" id = 'searchBar' placeholder="Search Task" aria-label="search-task" aria-describedby="basic-addon2">
-                        <div class="input-group-append custom-input-group">
-                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
-                        </div>
+<body>
+    <!--    This part contains the navbar-->
+    <nav class="navbar navbar-expand">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">Tasky</a>
+            <ul class="nav navbar-collapse navbar-nav">
+                <li class="navbar-items">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="navbar-items">
+                    <button class="btn btn-primary me-4 navbar-btn p-sm" id = "resetBtn">
+                        Reset Tasks
+                    </button>
+                </li>
+                <li class="navbar-items">
+                    <button class="btn btn-primary navbar-btn p-sm" data-bs-toggle="modal" data-bs-target="#modal" id="addTask"><i class="fa fa-plus"></i> Add New Task</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--        This contains the search bar for searching the tasks using their Task Title-->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group custom-input-group">
+                    <input type="text" class="form-control" id = 'searchBar' placeholder="Search Task" aria-label="search-task" aria-describedby="basic-addon2">
+                    <div class="input-group-append custom-input-group">
+                        <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
             </div>
         </div>
-        <!--        This is the modal drop down to add a new task in the form with multiple questions-->
-        <div class = container id = "forEmpty">
-            <h1>Seems Like you are free</h1>
-        </div>
-        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content modal-dialog">
-                    <nav class="navbar navbar-expand">
-                        <div class="container-fluid d-flex justify-content-between align-items-center">
-                            <p class="navbar-brand mb-0">Add Another Task</p>
-                            <ul class="nav navbar-nav">
-                                <li class="navbar-items">
-                                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                    <hr>
-                    <div class="modal-body">
-                        <form id="taskForm">
-                            <input type="hidden" id="taskId">
-                            <div class="form-group col-md-12">
-                                <label for="imageURL">Image URL</label>
-                                <input type="url" class="form-control" id="imageURL" placeholder="https://example/Image.png">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="taskTitle">Task Title</label>
-                                <input type="text" class="form-control" id="taskTitle" placeholder="Task Title" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="taskType">Task Type</label>
-                                <input type="text" class="form-control" id="taskType" placeholder="Type" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Task Description</label>
-                                <textarea class="form-control" id="description" rows="3"></textarea>
-                            </div>
-                            <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                            <button class="btn btn-primary" id="createTask">Save Changes</button>
-                        </form>
+    </div>
+    <!--        This is the modal drop down to add a new task in the form with multiple questions-->
+    <div class = container id = "forEmpty">
+        <h1>Seems Like you are free</h1>
+    </div>
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content modal-dialog">
+                <nav class="navbar navbar-expand">
+                    <div class="container-fluid d-flex justify-content-between align-items-center">
+                        <p class="navbar-brand mb-0">Add Another Task</p>
+                        <ul class="nav navbar-nav">
+                            <li class="navbar-items">
+                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </li>
+                        </ul>
                     </div>
+                </nav>
+                <hr>
+                <div class="modal-body">
+                    <form id="taskForm">
+                        <input type="hidden" id="taskId">
+                        <div class="form-group col-md-12">
+                            <label for="imageURL">Image URL</label>
+                            <input type="url" class="form-control" id="imageURL" placeholder="https://example/Image.png">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="taskTitle">Task Title</label>
+                            <input type="text" class="form-control" id="taskTitle" placeholder="Task Title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskType">Task Type</label>
+                            <input type="text" class="form-control" id="taskType" placeholder="Type" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Task Description</label>
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                        <button class="btn btn-primary" id="createTask">Save Changes</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <!--    This is the modal that is popped up when an existing task card is opened-->
-        <div class="modal fade" id="showTask" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" id="taskModal">
+    </div>
+    <!--    This is the modal that is popped up when an existing task card is opened-->
+    <div class="modal fade" id="showTask" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="taskModal">
 
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2" id="taskCardsRow">
+        <!--            this is the part where the task cards will be appended-->
+    </div>
+    <!--    Reset Confirmation Modal -->
+    <div class="modal fade" id="resetConfirmModal" tabindex="-1" aria-labelledby="resetConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resetConfirmModalLabel">Confirm Reset</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove all tasks?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-danger" id="confirmResetBtn">Yes</button>
                 </div>
             </div>
         </div>
-        <div class="container mt-2" id="taskCardsRow">
-            <!--            this is the part where the task cards will be appended-->
-        </div>
-    </body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="script.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>

@@ -27,12 +27,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalInstance = new bootstrap.Modal(modalElement);
     const searchBar = document.getElementById('searchBar');
     const forEmpty = document.getElementById('forEmpty');
-    const createTaskButton = document.getElementById('createTask'); // add new task button
+    const createTaskButton = document.getElementById('createTask');
+    const resetBtn = document.getElementById('resetBtn');
+    const resetConfirmModal = new bootstrap.Modal(document.getElementById('resetConfirmModal'));
+    const confirmResetBtn = document.getElementById('confirmResetBtn');
 
     // whenever add new task button is clicked a function named saveOrUpdateTask is called
     createTaskButton.addEventListener('click', function (event) {
         event.preventDefault();
         saveOrUpdateTask();
+    });
+    resetBtn.addEventListener('click', function () {
+        resetConfirmModal.show();
+    });
+
+    confirmResetBtn.addEventListener('click', function () {
+        Tasks.listOfTasks.splice(0, Tasks.listOfTasks.length);
+        saveFormData();
+        renderTasks();
+        zeroTask();
+        resetConfirmModal.hide();
+        console.log("Tasks are removed");
     });
 
     // This either updates an existing task or adds another task
@@ -122,11 +137,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return card;
     }
 
-    window.zeroTask = function(){
-        if(Tasks.listOfTasks.length === 0) {
+    function zeroTask() {
+        if (Tasks.listOfTasks.length === 0) {
+            resetBtn.disabled = true;
             forEmpty.style.display = 'flex';
-        }
-        else{
+        } else {
+            resetBtn.disabled = false;
             forEmpty.style.display = 'none';
         }
     }
